@@ -7,13 +7,6 @@ class FoodSerializer(serializers.ModelSerializer):
         model = Food
         fields = '__all__'
 
-
-class HistorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = History
-        fields = '__all__'
-
-
 class DebtHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = DebtHistory
@@ -38,6 +31,7 @@ class DocSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    food_id = FoodSerializer(source="food", read_only=True)
     class Meta:
         model = Product
         fields = '__all__'
@@ -95,3 +89,16 @@ class ProductSerializer(serializers.ModelSerializer):
         )
 
         return instance
+
+class ProductReadSerializer(serializers.ModelSerializer):
+    food = FoodSerializer(read_only=True)
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+    
+class HistorySerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    class Meta:
+        model = History
+        fields = '__all__'

@@ -3,7 +3,7 @@ from .models import History, Food, Product, DebtHistory, User,Doc
 from .serializers import (
     UserSerializer, FoodSerializer, ProductSerializer,
     HistorySerializer, DebtHistorySerializer,
-    DocSerializer
+    DocSerializer,ProductReadSerializer
 )
 
 # --------- USER -----------
@@ -41,7 +41,7 @@ class ProductList(generics.ListCreateAPIView):
 
 class ProductCUD(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = ProductReadSerializer
 
 
 # --------- HISTORY (kirim/chiqim) ---------
