@@ -33,20 +33,20 @@ class Product(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE, null=True)
     amount = models.IntegerField(default=0)
     change_price = models.IntegerField(default=0)  
-    all_price = models.IntegerField(default=0)
+    all_price = models.IntegerField(default=0)  
 
     date = models.DateTimeField(auto_now=True)
 
 # Kirim-chiqim tarixi
 class History(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    name = models.CharField(max_length=250,null=True)
 
     amount = models.IntegerField(default=0)
     change_price = models.IntegerField(default=0)
     all_price = models.IntegerField(default=0)
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ORGINAL)
-    order = models.CharField(max_length=20, choices=ORDER, default=INPUT)
+    status = models.CharField(max_length=250,null=True)
+    order = models.CharField(max_length=250,null=True)
 
     date = models.DateTimeField(auto_now=True)
 
@@ -60,8 +60,8 @@ class DebtHistory(models.Model):
     phone = models.CharField(max_length=50, null=True)
     amount = models.IntegerField(null=True)
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ORGINAL)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=250,null=True)
+    name = models.CharField(max_length=250,null=True)
 
 
 # Foydalanuvchi

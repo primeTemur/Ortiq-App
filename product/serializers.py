@@ -31,7 +31,6 @@ class DocSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    food_id = FoodSerializer(source="food", read_only=True)
     class Meta:
         model = Product
         fields = '__all__'
@@ -39,20 +38,15 @@ class ProductSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         request = self.context["request"].data
 
-        # History uchun faqat status va order
         status = request.get("status")
         order = request.get("order")
 
-        # Faqat status va order ni olib tashlaymiz
-        for key in ["status", "order"]:
-            validated_data.pop(key, None)
-
-        # Product yaratish (amount, change_price, all_price saqlanadi)
+        # Product yaratamiz
         product = Product.objects.create(**validated_data)
 
-        # History yozish (amount, change_price, all_price History uchun requestdan olinadi)
+        # History yaratamiz
         History.objects.create(
-            product=product,
+            name=product.food.name,                 # ✔ to‘g‘rilandi
             status=status,
             order=order,
             amount=request.get("amount", 0),
@@ -65,22 +59,17 @@ class ProductSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         request = self.context["request"].data
 
-        # History uchun faqat status va order
         status = request.get("status")
         order = request.get("order")
 
-        # Faqat status va order ni olib tashlaymiz
-        for key in ["status", "order"]:
-            validated_data.pop(key, None)
-
-        # Productni yangilash (amount, change_price, all_price saqlanadi)
+        # Productni yangilaymiz
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
 
-        # History yozish
+        # History yaratamiz
         History.objects.create(
-            product=instance,
+            name=instance.food.name,              
             status=status,
             order=order,
             amount=request.get("amount", 0),
@@ -89,6 +78,7 @@ class ProductSerializer(serializers.ModelSerializer):
         )
 
         return instance
+    
 
 class ProductReadSerializer(serializers.ModelSerializer):
     food = FoodSerializer(read_only=True)
@@ -98,7 +88,6 @@ class ProductReadSerializer(serializers.ModelSerializer):
 
     
 class HistorySerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
     class Meta:
         model = History
         fields = '__all__'
