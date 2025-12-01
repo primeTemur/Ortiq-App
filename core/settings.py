@@ -26,17 +26,8 @@ SECRET_KEY = 'django-insecure-rejn24ml5m4i@l6c!hpl@c02_++xsn7dh4vr^*vjn7sp99rmfx
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+APPEND_SLASH=True
 
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    'https://calc-app-beta-two.vercel.app',
-]
 
 # Application definition
 
@@ -83,16 +74,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-CORS_ALLOW_CREDENTIALS = True
-
+CORS_ORIGIN_ALLOW_ALL = True
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
     'https://calc-app-beta-two.vercel.app',
+    'http://localhost',
+    'http://127.0.0.1',
 ]
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
