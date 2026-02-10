@@ -77,3 +77,10 @@ class Doc(models.Model):
     name = models.TextField(null=True)
     price = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now=True)
+
+
+class ReturnedProduct(models.Model):
+    name = models.CharField(null=True,max_length=255)
+    count = models.IntegerField(null=True)
+
+    

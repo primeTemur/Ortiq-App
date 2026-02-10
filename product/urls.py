@@ -5,7 +5,8 @@ from .views import (
     ProductList, ProductCUD,
     HistoryList, HistoryCUD,
     DebtHistoryList, DebtHistoryCUD,
-    DocList,DocCUD
+    DocList,DocCUD,
+    ReturnedProductCUD,ReturnedProductList
 )
 
 urlpatterns = [
@@ -31,4 +32,7 @@ urlpatterns = [
 
     path('docs/', DocList.as_view(), name='doc-list'),
     path('docs/<int:pk>/', DocCUD.as_view(), name='doc-detail'),
+
+    path('returned/',ReturnedProductList.as_view(),name='returned-list'),
+    path('returned/<int:pk>/',ReturnedProductCUD.as_view(),name='returned-detail')
 ]

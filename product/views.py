@@ -1,9 +1,10 @@
 from rest_framework import generics,filters
-from .models import History, Food, Product, DebtHistory, User,Doc
+from .models import History, Food, Product, DebtHistory, User,Doc,ReturnedProduct
 from .serializers import (
     UserSerializer, FoodSerializer, ProductSerializer,
     HistorySerializer, DebtHistorySerializer,
-    DocSerializer,ProductReadSerializer
+    DocSerializer,ProductReadSerializer,
+    ReturnedProductSerializer
 )
 
 # --------- USER -----------
@@ -70,3 +71,10 @@ class DebtHistoryCUD(generics.RetrieveUpdateDestroyAPIView):
     queryset = DebtHistory.objects.all().order_by('-id')
     serializer_class = DebtHistorySerializer
     
+class ReturnedProductList(generics.ListCreateAPIView):
+    queryset=ReturnedProduct.objects.all().order_by("-id")
+    serializer_class = ReturnedProductSerializer
+
+class ReturnedProductCUD(generics.RetrieveUpdateDestroyAPIView):
+    queryset=ReturnedProduct.objects.all().order_by("-id")
+    serializer_class = ReturnedProductSerializer

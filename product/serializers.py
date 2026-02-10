@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Food, Product, History, DebtHistory, User, Doc
+from .models import Food, Product, History, DebtHistory, User, Doc,ReturnedProduct
 
 
 class FoodSerializer(serializers.ModelSerializer):
@@ -90,4 +90,9 @@ class ProductReadSerializer(serializers.ModelSerializer):
 class HistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = History
+        fields = '__all__'
+
+class ReturnedProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReturnedProduct
         fields = '__all__'
