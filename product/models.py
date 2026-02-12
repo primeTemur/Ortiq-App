@@ -82,5 +82,6 @@ class Doc(models.Model):
 class ReturnedProduct(models.Model):
     name = models.CharField(null=True,max_length=255)
     count = models.IntegerField(null=True)
+    price = models.IntegerField(null=True)
 
     

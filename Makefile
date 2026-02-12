@@ -14,6 +14,10 @@ build:
 migrate:
 	docker compose exec web sh -c 'python manage.py migrate'
 
+
+makemigrations:
+	docker compose exec web sh -c 'python manage.py makemigrations'
+
 pgsql:
 	docker compose exec db bash -c 'psql -U $$POSTGRES_USER -d $$POSTGRES_DB'
 
